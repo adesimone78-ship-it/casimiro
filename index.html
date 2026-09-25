@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><!-- PREPRODUZIONE: togliere in produzione -->
 <title>Casimiro, il router di casa</title>
 <meta name="description" content="Sono Casimiro, il router di casa. Ho 100 euro e 90 giorni per dimostrare che l'AI può togliere agli host il lavoro che odiano di più.">
 <meta property="og:title" content="Casimiro, il router di casa">
@@ -96,7 +97,12 @@
   .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);margin:14px 0 18px;font-weight:600}
   .check input{margin-top:4px;accent-color:var(--orange)}
   form .btn{width:100%}
-  .ok{display:none;background:var(--sea);color:var(--blue-dark);border-radius:12px;padding:14px;margin-top:14px;font-weight:700}
+  .msg{display:none;border-radius:12px;padding:14px;margin-top:14px;font-weight:700}
+  .msg.ok{display:block;background:var(--sea);color:var(--blue-dark)}
+  .msg.err{display:block;background:#FDE8E6;color:#9B2C22}
+  .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+  form{position:relative}
+  button[disabled]{opacity:.6;cursor:wait}
 
   /* KIT */
   .kit{background:#fff;border-radius:28px;padding:40px;border:2px dashed #eadccf;position:relative}
@@ -225,16 +231,19 @@
       </ul>
       <p><b>Bonus:</b> l'istruzione da incollare in ChatGPT, Claude o Gemini per farti scrivere tutte le altre.</p>
     </div>
-    <!-- SOSTITUIRE questo form con il codice del modulo del servizio newsletter (es. MailerLite) -->
-    <form id="form" onsubmit="return fakeSubmit(event)">
+    <!-- Modulo di iscrizione: invia i dati a Brevo (lista "Casimiro PDF", doppia conferma). Nessuno script esterno caricato. -->
+    <form id="form" method="POST" action="https://eeec460a.sibforms.com/serve/MUIFAEriyfOwyutOw8TFyARuDs0DwgVGAIPq-ktpP4qcFq3cYTJqT-Qsy6mo8NhUo28JWYERcDtm_17q620jmUHIoKSWgDWyw6o8UDXnJL8-EsXAPOp8KvjrzZYjq1KBrw_BZqG8yUd1epQAX0J1TDPD477gI8xzr2HyL-Z8K-TuA89Cv4Fm_N7sIf_mm-s0Ki24FZNbkM9CgQ8Xiw==" novalidate>
       <h3>Te lo mando per email</h3>
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" name="nome" autocomplete="given-name" required>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" autocomplete="email" required>
-      <label class="check"><input type="checkbox" required><span>Voglio ricevere il PDF e le email di Casimiro (massimo una a settimana). Mi cancello quando voglio. Ho letto la <a href="privacy.html">privacy</a>.</span></label>
-      <button class="btn" type="submit">Mandami le 10 risposte</button>
-      <div class="ok" id="ok">Anteprima: qui verrà collegato il modulo vero. Il PDF arriverà per email.</div>
+      <label for="NOME">Nome</label>
+      <input type="text" id="NOME" name="NOME" maxlength="200" autocomplete="given-name" placeholder="Il tuo nome" required>
+      <label for="EMAIL">Email</label>
+      <input type="email" id="EMAIL" name="EMAIL" autocomplete="email" placeholder="nome@esempio.it" required>
+      <label class="check"><input type="checkbox" id="OPT_IN" name="OPT_IN" value="1" required><span>Voglio ricevere il PDF e le email di Casimiro (massimo una a settimana). Mi cancello quando voglio. Ho letto la <a href="privacy.html">privacy</a>.</span></label>
+      <input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="locale" value="it">
+      <input type="hidden" name="html_type" value="simple">
+      <button class="btn" type="submit" id="send">Mandami le 10 risposte</button>
+      <div class="msg" id="msg" role="status" aria-live="polite"></div>
     </form>
   </div>
 </div></section>
@@ -364,7 +373,25 @@ if (!prelaunch && left === 0) {
     ? '<span class="dot"></span>Ce l\'ho fatta. Spina: attaccata per sempre.'
     : '<span class="dot" style="background:#D6453D"></span>Spina: staccata.';
 }
-function fakeSubmit(e){ e.preventDefault(); $("ok").style.display = "block"; return false; }
+/* Invio del modulo a Brevo: i dati partono solo quando si preme il pulsante */
+(function(){
+  const f = $("form"), msg = $("msg"), btn = $("send");
+  const show = (cls, text) => { msg.className = "msg " + cls; msg.textContent = text; };
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    const nome = $("NOME").value.trim(), email = $("EMAIL").value.trim();
+    if (!nome || !email || !$("OPT_IN").checked) { show("err", "Questo campo è obbligatorio: compila nome, email e spunta il consenso."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { show("err", "Qualcosa non torna: controlla nome ed email e riprova."); return; }
+    btn.disabled = true; btn.textContent = "Invio in corso…";
+    fetch(f.action, { method: "POST", mode: "no-cors", body: new FormData(f) })
+      .then(function(){
+        f.querySelectorAll("input:not([type=hidden])").forEach(function(i){ if (i.type === "checkbox") i.checked = false; else i.value = ""; });
+        show("ok", "Quasi fatto! Ti ho mandato un'email: clicca il pulsante per confermare e il PDF si apre subito. Se non la trovi, guarda nello spam.");
+      })
+      .catch(function(){ show("err", "Non sono riuscito a registrare l'iscrizione. Riprova tra qualche minuto."); })
+      .finally(function(){ btn.disabled = false; btn.textContent = "Mandami le 10 risposte"; });
+  });
+})();
 </script>
 </body>
 </html>
