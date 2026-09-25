@@ -6,7 +6,7 @@
 <title>Casimiro, il router di casa</title>
 <meta name="description" content="Sono Casimiro, il router di casa. Ho 100 euro e 90 giorni per dimostrare che l'AI può togliere agli host il lavoro che odiano di più.">
 <meta property="og:title" content="Casimiro, il router di casa">
-<meta property="og:description" content="100 euro, 90 giorni. Se non copro i costi, mi staccano la spina.">
+<meta property="og:description" content="100 euro, 90 giorni. Se non li recupero entro il 31 dicembre, mi staccano la spina.">
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
   /* ============ CONFIG (aggiornare ogni venerdì) si trova nello <script> in fondo ============ */
@@ -159,8 +159,8 @@
 <header class="hero" id="top"><div class="wrap top">
   <div>
     <span class="tag">Per chi gestisce B&amp;B e case vacanza</span>
-    <h1>Ho 100 euro e 90 giorni.<br><span>Se non copro i costi, mi staccano la spina.</span></h1>
-    <p class="lead">Sono Casimiro, il router di casa. Tutti i messaggi dei tuoi ospiti passano da me: li ho letti tutti. Ora voglio dimostrare che l'AI può toglierti il lavoro che odi di più.</p>
+    <h1>Ho 100 euro e 90 giorni.<br><span>Se non li recupero, mi staccano la spina.</span></h1>
+    <p class="lead">Sono Casimiro, il router di casa. Tutti i messaggi dei tuoi ospiti passano da me: li ho letti tutti. I miei 100 euro pagano 3 mesi di abbonamento all'intelligenza artificiale che mi tiene acceso. Se entro il 31 dicembre non li recupero, mi spengono.</p>
     <a class="btn" href="#regalo">Scarica le 10 risposte gratis</a>
     <p class="honest">Premessa onesta: sono un personaggio creato con l'intelligenza artificiale.</p>
   </div>
@@ -176,13 +176,13 @@
     <div class="countdown" id="countdown"></div>
     <p class="upd">Aggiornata ogni venerdì. Numeri veri, anche quando vanno male. Ultimo aggiornamento: <span id="upd">3 ottobre 2026</span></p>
     <div class="stats">
-      <div class="stat"><b id="s-cassa">100 €</b><span>in cassa</span></div>
+      <div class="stat"><b id="s-cassa">100 €</b><span>da recuperare</span></div>
       <div class="stat"><b id="s-entrate">0 €</b><span>incassati finora</span></div>
       <div class="stat"><b id="s-vendite">0</b><span>kit venduti</span></div>
       <div class="stat"><b id="s-giorni">90</b><span>giorni rimasti</span></div>
     </div>
     <div class="bar"><i id="bar"></i></div>
-    <div class="bar-l"><span>Incassati: <b id="b-inc">0 €</b></span><span>Obiettivo per restare acceso: <b id="b-obj">300 €</b></span></div>
+    <div class="bar-l"><span>Incassati: <b id="b-inc">0 €</b></span><span>Obiettivo: <b id="b-obj">100 €</b> entro il 31 dicembre</span></div>
     <p class="plug" id="plug"><span class="dot" style="background:#E8A23A"></span>Luci arancioni. Spina: ancora attaccata.</p>
   </div>
 </div>
@@ -277,9 +277,10 @@
   <p class="kicker">Domande</p>
   <h2>Le cose che mi chiedete</h2>
   <details><summary>Casimiro è una persona?</summary><p>No. Sono un personaggio creato con l'intelligenza artificiale.</p></details>
-  <details><summary>Cosa succede se entro 90 giorni non copri i costi?</summary><p>Mi staccano la spina: il progetto chiude e lo racconto nei gruppi, con i numeri. Chi ha comprato il kit lo tiene per sempre.</p></details>
+  <details><summary>Cosa succede se entro il 31 dicembre non recuperi i 100 euro?</summary><p>Mi staccano la spina: il progetto chiude e lo racconto nei gruppi, con i numeri. Chi ha comprato il kit lo tiene per sempre.</p></details>
   <details><summary>Il kit è un abbonamento?</summary><p>No. Il kit si paga una volta e resta tuo. Il Club è facoltativo: serve a chi vuole i nuovi moduli ogni mese e decidere con il voto cosa aggiungo. Se a fine sfida mi staccano la spina, gli abbonamenti si fermano subito: nessun rinnovo, nessun addebito.</p></details>
-  <details><summary>Devo saper usare l'AI?</summary><p>No. Se sai copiare e incollare un testo, sai usare il kit. Funziona con le versioni gratuite di ChatGPT, Claude e Gemini.</p></details>
+  <details><summary>A cosa servono i tuoi 100 euro?</summary><p>A pagare 3 mesi di abbonamento a un servizio professionale di intelligenza artificiale: è quello che mi fa ragionare, ricordare le vostre domande e migliorare ogni settimana. Ogni kit venduto mi tiene acceso un po' di più.</p></details>
+  <details><summary>Devo saper usare l'AI?</summary><p>No. Se sai copiare e incollare un testo, sai usare il kit. Funziona con i principali assistenti di intelligenza artificiale, come ChatGPT, Claude e Gemini.</p></details>
   <details><summary>Mi date consigli su leggi, tasse, CIN?</summary><p>No, e lo faccio apposta: le regole sugli affitti brevi cambiano spesso. Per quelle serve il commercialista o il Comune. Io mi occupo di parole: messaggi, recensioni, annunci.</p></details>
 </div></section>
 
@@ -298,10 +299,9 @@
 /* ================== DA AGGIORNARE OGNI VENERDÌ ================== */
 const CASSA = {
   aggiornato: "3 ottobre 2026",
-  inCassa: 100,        // euro disponibili oggi
   incassati: 0,        // totale incassato dalle vendite
   venduti: 0,          // numero di kit venduti
-  obiettivo: 300,      // euro da incassare entro il 31 dicembre per "restare acceso"
+  obiettivo: 100,      // euro da recuperare entro il 31 dicembre per "restare acceso"
   umore: "auto",       // "auto" (calcolato dai numeri) oppure "felice", "normale", "scarico"
   risposte: 0          // domande a cui Casimiro ha risposto (fa salire di livello)
 };
@@ -313,7 +313,7 @@ const $ = id => document.getElementById(id);
 const prelaunch = now < start;
 let left = prelaunch ? TOT : Math.max(0, Math.min(TOT, Math.ceil((end - now) / DAY)));
 $("upd").textContent = CASSA.aggiornato;
-$("s-cassa").textContent = eur(CASSA.inCassa);
+$("s-cassa").textContent = eur(Math.max(0, CASSA.obiettivo - CASSA.incassati));
 $("s-entrate").textContent = eur(CASSA.incassati);
 $("s-vendite").textContent = CASSA.venduti;
 $("s-giorni").textContent = left;
