@@ -3,63 +3,205 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy · Casimiro, il router di casa</title>
-<meta name="robots" content="noindex">
+<title>Privacy e cookie · Casimiro, il router di casa</title>
+<meta name="description" content="Informativa privacy e cookie del sito di Casimiro, il router di casa.">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
-  body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#FFF8F1;color:#1F2A33;line-height:1.65;margin:0}
-  main{max-width:760px;margin:0 auto;padding:40px 20px 60px}
-  h1{font-size:32px;margin:0 0 6px}
-  h2{font-size:20px;margin:32px 0 8px;color:#1F4E73}
-  p,li{font-size:16px}
-  a{color:#2F6F9F}
-  .muted{color:#5E6B75;font-size:14px}
-  .back{display:inline-block;margin-bottom:24px;font-weight:700;text-decoration:none}
-  .fill{background:#FDEBDD;padding:0 4px;border-radius:4px}
+  :root{
+    --orange:#E8793A; --orange-dark:#C45E22; --orange-soft:#FDEBDD;
+    --blue:#2F6F9F; --blue-dark:#1F4E73; --sea:#E6F1F8;
+    --cream:#FFF8F1; --ink:#1F2A33; --muted:#5E6B75; --line:#f1e2d4; --green:#2E9E6A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Nunito",system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;font-size:17px}
+  h1,h2,h3{font-family:"Fredoka",system-ui,sans-serif;line-height:1.2}
+  a{color:var(--blue)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,248,241,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1080px}
+  .logo{font-family:"Fredoka";font-weight:700;font-size:22px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+  .leds{display:inline-flex;gap:3px}
+  .leds i{width:7px;height:7px;border-radius:50%;background:var(--green)}
+  .back{font-weight:800;text-decoration:none;font-size:15px}
+
+  header{padding:48px 0 28px}
+  .tag{display:inline-block;background:var(--sea);color:var(--blue-dark);font-weight:800;font-size:14px;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+  header h1{font-size:clamp(34px,5vw,48px);margin-bottom:12px}
+  header p{color:var(--muted);font-size:19px;max-width:38em}
+  .upd{font-size:14px;color:var(--muted);margin-top:14px}
+
+  .brief{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:8px 0 36px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+  .card .ico{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-family:"Fredoka";font-weight:700;color:#fff;margin-bottom:10px}
+  .card h3{font-size:18px;margin-bottom:4px}
+  .card p{font-size:15.5px;color:var(--muted)}
+  .i1{background:var(--orange)} .i2{background:var(--blue)} .i3{background:var(--green)} .i4{background:var(--blue-dark)}
+
+  .toc{background:var(--orange-soft);border-radius:18px;padding:20px 24px;margin-bottom:36px}
+  .toc b{display:block;margin-bottom:6px}
+  .toc ol{columns:2;column-gap:28px;padding-left:20px;font-size:15.5px}
+  .toc a{text-decoration:none}
+
+  section{background:#fff;border-radius:20px;border:1px solid var(--line);padding:26px 28px;margin-bottom:16px;scroll-margin-top:80px}
+  section h2{font-size:22px;margin-bottom:10px;display:flex;gap:10px;align-items:baseline}
+  section h2 span{color:var(--orange);font-size:18px}
+  section p{margin-bottom:10px}
+  section p:last-child{margin-bottom:0}
+  section ul{padding-left:20px;margin:6px 0 10px}
+  section li{margin-bottom:6px}
+  table{width:100%;border-collapse:collapse;font-size:15.5px;margin:8px 0 4px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Fredoka";font-weight:600;background:var(--cream)}
+  .fill{background:#FFE3CC;padding:1px 6px;border-radius:6px;font-weight:700}
+  .nocookie{display:flex;gap:16px;align-items:center;background:var(--sea);border-radius:16px;padding:16px 18px;margin-bottom:12px}
+  .nocookie strong{font-family:"Fredoka";font-size:30px;color:var(--blue-dark);line-height:1}
+
+  footer{background:var(--ink);color:#c4ced5;padding:30px 0;font-size:14px;margin-top:40px}
+  footer a{color:#fff}
+
+  @media (max-width:700px){
+    .brief{grid-template-columns:1fr}
+    .toc ol{columns:1}
+    section{padding:22px 18px}
+    th,td{padding:8px}
+    table,thead,tbody,tr,th,td{display:block}
+    thead{display:none}
+    tr{border-bottom:1px solid var(--line);padding:8px 0}
+    td{border:0;padding:2px 0}
+    td:first-child{font-weight:800}
+  }
 </style>
 </head>
 <body>
-<main>
-  <a class="back" href="index.html">← Torna da Casimiro</a>
-  <h1>Informativa sulla privacy</h1>
-  <p class="muted">Ultimo aggiornamento: <span class="fill">[data di pubblicazione]</span></p>
 
-  <p>Questa pagina spiega quali dati raccogliamo su questo sito, perché e come puoi controllarli. Casimiro è un personaggio creato con l'intelligenza artificiale; il sito è gestito dal titolare indicato qui sotto.</p>
+<nav><div class="wrap">
+  <a class="logo" href="index.html"><span class="leds"><i></i><i></i><i></i></span>Casimiro</a>
+  <a class="back" href="index.html">← Torna alla pagina</a>
+</div></nav>
 
-  <h2>1. Chi è il titolare</h2>
-  <p><span class="fill">[Nome e Cognome / Ragione sociale]</span><br>
-  <span class="fill">[Indirizzo]</span><br>
-  <span class="fill">[P.IVA, se presente]</span><br>
-  Email: <span class="fill">[email di contatto]</span></p>
+<header><div class="wrap">
+  <span class="tag">Privacy e cookie</span>
+  <h1>I tuoi dati, spiegati semplice</h1>
+  <p>Sono un router: di dati ne vedo passare tanti. Qui ti dico quali tengo, perché, e come puoi riprenderteli quando vuoi.</p>
+  <p class="upd">Ultimo aggiornamento: <span class="fill">[data di pubblicazione]</span></p>
+</div></header>
 
-  <h2>2. Quali dati raccogliamo</h2>
-  <ul>
-    <li><b>Nome ed email</b>, solo se li inserisci nel modulo per ricevere il PDF gratuito.</li>
-    <li><b>Dati tecnici di navigazione</b> (ad esempio indirizzo IP, tipo di browser), registrati automaticamente dal servizio di hosting per motivi di sicurezza e funzionamento.</li>
-  </ul>
-  <p>Non usiamo cookie pubblicitari né strumenti di tracciamento o profilazione.</p>
+<main class="wrap">
 
-  <h2>3. Perché li usiamo</h2>
-  <ul>
-    <li><b>Inviarti il PDF</b> che hai richiesto e le email di Casimiro (massimo una a settimana), con contenuti pratici e informazioni sui suoi prodotti. Base giuridica: il tuo <b>consenso</b>, che dai spuntando la casella nel modulo.</li>
-    <li><b>Far funzionare e proteggere il sito</b> (dati tecnici). Base giuridica: <b>legittimo interesse</b> del titolare.</li>
-  </ul>
+  <div class="brief">
+    <div class="card"><div class="ico i1">1</div><h3>Cosa raccolgo</h3><p>Solo nome ed email, e solo se li inserisci tu per ricevere il PDF gratuito.</p></div>
+    <div class="card"><div class="ico i2">2</div><h3>Perché</h3><p>Per mandarti il PDF e le email di Casimiro, massimo una a settimana. Niente altro.</p></div>
+    <div class="card"><div class="ico i3">3</div><h3>Zero cookie</h3><p>Questo sito non usa cookie e non carica servizi di terze parti. Per questo non vedi banner.</p></div>
+    <div class="card"><div class="ico i4">4</div><h3>Decidi tu</h3><p>Ti cancelli con un clic da ogni email. Per tutto il resto mi scrivi e rispondo.</p></div>
+  </div>
 
-  <h2>4. Chi tratta i dati per nostro conto</h2>
-  <ul>
-    <li><b>Brevo</b> (Sendinblue SAS, Francia): gestione della lista e invio delle email.</li>
-    <li><b>GitHub Pages</b> (GitHub Inc., Stati Uniti): hosting del sito. Il trasferimento verso gli Stati Uniti avviene con le garanzie previste dal GDPR (ad esempio clausole contrattuali standard o adesione al Data Privacy Framework).</li>
-    <li><b>Google Fonts</b> (Google): caricamento dei caratteri grafici del sito, che comporta la trasmissione del tuo indirizzo IP a Google.</li>
-  </ul>
-  <p>Non vendiamo né cediamo i tuoi dati a nessuno.</p>
+  <div class="toc">
+    <b>In questa pagina</b>
+    <ol>
+      <li><a href="#titolare">Chi è il titolare</a></li>
+      <li><a href="#dati">Quali dati raccolgo</a></li>
+      <li><a href="#finalita">Perché e su quale base</a></li>
+      <li><a href="#obbligo">Sei obbligato a darmeli?</a></li>
+      <li><a href="#fornitori">Chi li tratta per mio conto</a></li>
+      <li><a href="#conservazione">Per quanto li tengo</a></li>
+      <li><a href="#diritti">I tuoi diritti</a></li>
+      <li><a href="#cookie">Cookie</a></li>
+      <li><a href="#modifiche">Modifiche a questa pagina</a></li>
+    </ol>
+  </div>
 
-  <h2>5. Per quanto tempo li conserviamo</h2>
-  <p>Nome ed email restano nella lista finché non ti cancelli. I dati tecnici sono conservati dal servizio di hosting per il tempo strettamente necessario.</p>
+  <section id="titolare">
+    <h2><span>1</span>Chi è il titolare</h2>
+    <p>Casimiro è un personaggio creato con l'intelligenza artificiale. Il titolare del trattamento dei dati, cioè chi decide come vengono usati, è:</p>
+    <p><span class="fill">[Nome e Cognome / Ragione sociale]</span><br>
+    <span class="fill">[Indirizzo completo]</span><br>
+    <span class="fill">[Codice fiscale o P.IVA]</span><br>
+    Email: <span class="fill">[email di contatto]</span></p>
+  </section>
 
-  <h2>6. I tuoi diritti</h2>
-  <p>Puoi in qualsiasi momento: accedere ai tuoi dati, correggerli, cancellarli, limitarne l'uso, opporti al trattamento, riceverli in un formato leggibile e revocare il consenso. Per cancellarti basta cliccare il link presente in fondo a ogni email. Per tutto il resto scrivi a <span class="fill">[email di contatto]</span>.</p>
-  <p>Se ritieni che i tuoi dati siano trattati in modo non corretto, puoi presentare reclamo al <a href="https://www.garanteprivacy.it" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
+  <section id="dati">
+    <h2><span>2</span>Quali dati raccolgo</h2>
+    <ul>
+      <li><b>Dati che mi dai tu</b>, compilando il modulo per il PDF gratuito: nome ed email.</li>
+      <li><b>Prova del consenso</b>: data e ora dell'iscrizione e della conferma, e l'indirizzo IP da cui sono avvenute. Servono a dimostrare che l'iscrizione l'hai fatta e confermata tu.</li>
+      <li><b>Dati sulle email</b>: le email possono indicare se sono state aperte e quali link sono stati cliccati. Uso questi dati solo in forma complessiva, per capire quali contenuti sono utili.</li>
+      <li><b>Dati tecnici di navigazione</b>: il servizio che ospita il sito registra automaticamente dati come indirizzo IP e tipo di browser, per sicurezza e funzionamento. Non li uso per identificarti.</li>
+    </ul>
+    <p>Non raccolgo dati sensibili e non prendo decisioni automatiche su di te.</p>
+  </section>
 
-  <p class="muted" style="margin-top:40px">Questa informativa è una bozza da verificare prima della pubblicazione.</p>
+  <section id="finalita">
+    <h2><span>3</span>Perché li uso e su quale base</h2>
+    <table>
+      <thead><tr><th>Finalità</th><th>Base giuridica (GDPR)</th></tr></thead>
+      <tbody>
+        <tr><td>Inviarti il PDF e le email di Casimiro, con consigli pratici e notizie sui suoi prodotti</td><td>Il tuo consenso (art. 6.1.a), che dai spuntando la casella e confermando l'email</td></tr>
+        <tr><td>Dimostrare di avere il tuo consenso</td><td>Obbligo di legge (art. 6.1.c e art. 7.1)</td></tr>
+        <tr><td>Far funzionare e proteggere il sito</td><td>Legittimo interesse del titolare (art. 6.1.f)</td></tr>
+      </tbody>
+    </table>
+    <p>Puoi ritirare il consenso quando vuoi, senza conseguenze sulle email già ricevute.</p>
+  </section>
+
+  <section id="obbligo">
+    <h2><span>4</span>Sei obbligato a darmeli?</h2>
+    <p>No. Il modulo è facoltativo. Senza email però non posso mandarti il PDF.</p>
+  </section>
+
+  <section id="fornitori">
+    <h2><span>5</span>Chi li tratta per mio conto</h2>
+    <p>Uso due servizi esterni, nominati responsabili del trattamento. Non vendo né cedo i tuoi dati a nessuno.</p>
+    <table>
+      <thead><tr><th>Servizio</th><th>A cosa serve</th><th>Dove</th></tr></thead>
+      <tbody>
+        <tr><td>Brevo (Sendinblue SAS, Francia)</td><td>Gestione della lista e invio delle email</td><td>Unione Europea</td></tr>
+        <tr><td>GitHub Pages (GitHub Inc.)</td><td>Pubblicazione del sito</td><td>Stati Uniti, con le garanzie previste dal GDPR (Data Privacy Framework UE-USA e clausole contrattuali standard)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="conservazione">
+    <h2><span>6</span>Per quanto li tengo</h2>
+    <ul>
+      <li><b>Nome ed email</b>: finché resti iscritto. Se ti cancelli li elimino; resta solo l'indirizzo email in una lista di esclusione, per essere sicuri di non scriverti più.</li>
+      <li><b>Prova del consenso</b>: per il tempo necessario a dimostrarlo in caso di verifica.</li>
+      <li><b>Dati tecnici</b>: per il tempo stabilito dal servizio di hosting per sicurezza e funzionamento.</li>
+    </ul>
+  </section>
+
+  <section id="diritti">
+    <h2><span>7</span>I tuoi diritti</h2>
+    <p>In qualsiasi momento puoi chiedere di:</p>
+    <ul>
+      <li>sapere quali dati ho su di te e riceverne una copia;</li>
+      <li>correggerli o cancellarli;</li>
+      <li>limitarne l'uso o opporti al trattamento;</li>
+      <li>riceverli in un formato leggibile per portarli altrove;</li>
+      <li>ritirare il consenso.</li>
+    </ul>
+    <p><b>Per cancellarti</b> basta il link in fondo a ogni email. <b>Per tutto il resto</b> scrivi a <span class="fill">[email di contatto]</span>: rispondo entro 30 giorni.</p>
+    <p>Se pensi che i tuoi dati siano trattati male, puoi fare reclamo al <a href="https://www.garanteprivacy.it" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
+  </section>
+
+  <section id="cookie">
+    <h2><span>8</span>Cookie</h2>
+    <div class="nocookie"><strong>0</strong><div><b>Cookie usati da questo sito.</b><br>Né tecnici, né statistici, né pubblicitari.</div></div>
+    <p>Il sito non installa cookie sul tuo dispositivo e non carica servizi esterni: anche i caratteri grafici sono ospitati sul sito stesso. Per questo non trovi il banner per accettare o rifiutare i cookie: non c'è nulla da accettare.</p>
+    <p>Se in futuro aggiungerò strumenti che usano cookie non tecnici (per esempio statistiche o pubblicità), aggiornerò questa pagina e ti chiederò il consenso prima di attivarli, con la possibilità di rifiutarli.</p>
+  </section>
+
+  <section id="modifiche">
+    <h2><span>9</span>Modifiche a questa pagina</h2>
+    <p>Se cambio qualcosa, aggiorno la data in alto. Per le modifiche importanti avviso anche gli iscritti via email.</p>
+  </section>
+
 </main>
+
+<footer><div class="wrap">
+  <p><b style="color:#fff">Casimiro, il router di casa</b> è un personaggio creato con l'intelligenza artificiale. · <a href="index.html">Torna alla pagina</a></p>
+</div></footer>
+
 </body>
 </html>
