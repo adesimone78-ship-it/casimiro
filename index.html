@@ -245,7 +245,6 @@
       <label class="check"><input type="checkbox" id="OPT_IN" name="OPT_IN" value="1" required><span>Voglio ricevere il PDF e le email di Casimiro (massimo una a settimana). Mi cancello quando voglio. Ho letto la <a href="privacy.html">privacy</a>.</span></label>
       <input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input type="hidden" name="locale" value="it">
-      <input type="hidden" name="html_type" value="simple">
       <button class="btn" type="submit" id="send">Mandami le 10 risposte</button>
       <div class="msg" id="msg" role="status" aria-live="polite"></div>
     </form>
@@ -387,8 +386,11 @@ if (!prelaunch && left === 0) {
     if (!nome || !email || !$("OPT_IN").checked) { show("err", "Questo campo è obbligatorio: compila nome, email e spunta il consenso."); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { show("err", "Qualcosa non torna: controlla nome ed email e riprova."); return; }
     btn.disabled = true; btn.textContent = "Invio in corso…";
-    fetch(f.action, { method: "POST", mode: "no-cors", body: new FormData(f) })
-      .then(function(){
+    /* Brevo risponde in JSON {success, message}: leggiamo l'esito vero */
+    fetch(f.action, { method: "POST", body: new FormData(f) })
+      .then(function(r){ return r.json().catch(function(){ return { success: false }; }); })
+      .then(function(d){
+        if (!d || !d.success) throw new Error("brevo");
         f.querySelectorAll("input:not([type=hidden])").forEach(function(i){ if (i.type === "checkbox") i.checked = false; else i.value = ""; });
         show("ok", "Quasi fatto! Ti ho mandato un'email: clicca il pulsante per confermare e il PDF si apre subito. Se non la trovi, guarda nello spam.");
       })
